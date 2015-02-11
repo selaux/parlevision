@@ -24,7 +24,7 @@
 
 #include <plvcore/CvMatData.h>
 #include <plvcore/CvMatDataPin.h>
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 #include <plvcore/Util.h>
 #include <limits>
 

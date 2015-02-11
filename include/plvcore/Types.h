@@ -30,7 +30,7 @@
 #include <QRect>
 #include <QSharedData>
 
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 #include "plvglobal.h"
 #include "RefPtr.h"
 #include "assert.h"

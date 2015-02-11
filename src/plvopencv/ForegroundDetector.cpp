@@ -24,8 +24,8 @@
 #include "ForegroundDetector.h"
 #include <plvcore/CvMatData.h>
 #include <plvcore/CvMatDataPin.h>
-#include <opencv/cv.h>
-#include <opencv/cvaux.h>
+#include <opencv/cv.hpp>
+#include <opencv/cvaux.hpp>
 
 using namespace plv;
 using namespace plvopencv;
@@ -102,8 +102,8 @@ bool ForegroundDetector::process()
     cvUpdateBGStatModel(&current_frame,m_bgModel);
 
     // copy the data so we have ownership
-    CvMatData fg = m_bgModel->foreground;
-    CvMatData bg = m_bgModel->background;
+    CvMatData fg = CvMatData(m_bgModel->foreground);
+    CvMatData bg = CvMatData(m_bgModel->background);
 
     m_outForeground->put(fg);
     m_outBackground->put(bg);

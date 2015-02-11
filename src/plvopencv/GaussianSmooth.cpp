@@ -23,6 +23,9 @@
 
 #include "GaussianSmooth.h"
 
+#include <opencv/highgui.h>
+#include <opencv/cv.hpp>
+
 #include <plvcore/CvMatData.h>
 #include <plvcore/CvMatDataPin.h>
 #include <plvcore/Util.h>

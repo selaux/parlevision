@@ -26,7 +26,7 @@
 #include <QMutex>
 #include <QWaitCondition>
 
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 #include <opencv/highgui.h>
 
 #include <plvcore/CvMatData.h>
@@ -103,7 +103,7 @@ namespace plvopencv
         QMutex          m_mutex;
         QMutex          m_opencv_mutex;
         QWaitCondition  m_condition;
-        CvCapture*      m_captureDevice;
+        cv::VideoCapture*      m_captureDevice;
 
         unsigned int m_imgCount;
 

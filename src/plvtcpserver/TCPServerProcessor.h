@@ -26,7 +26,7 @@
 #include <plvcore/PipelineProcessor.h>
 #include <plvcore/RefPtr.h>
 #include <plvcore/Pin.h>
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 
 #include "Server.h"
 

@@ -55,7 +55,7 @@ namespace plvgui
         void convertCvMatData( const plv::CvMatData& data, int id=0 );
         void convertCvMatDataList( const QList<plv::CvMatData>& data, int id=0 );
 
-        /** Converts an OpenCV iplImage to a QImage.
+        /**
           * @throw ImageConversionException when conversion fails.
           */
         static QImage cvMatToQImage( const cv::Mat& mat )

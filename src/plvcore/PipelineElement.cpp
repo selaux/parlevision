@@ -29,7 +29,7 @@
 #include <QMetaProperty>
 #include <QtConcurrentRun>
 #include <algorithm>
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 
 #include "Pipeline.h"
 #include "RefCounted.h"

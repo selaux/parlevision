@@ -3,6 +3,7 @@
 
 #include "ViolaJonesFaceDetector.h"
 #include <plvcore/CvMatData.h>
+#include <opencv/cv.hpp>
 
 #include <plvcore/CvMatDataPin.h>
 

@@ -26,7 +26,7 @@
 
 #include <plvcore/Pin.h>
 #include <plvcore/CvMatDataPin.h>
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 #include <opencv/highgui.h>
 #include <QDir>
 

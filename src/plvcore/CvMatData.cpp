@@ -36,16 +36,6 @@ using namespace plv;
 //{
 //}
 
-CvMatData::CvMatData( const IplImage* img )
-{
-    // copy image data
-    // workaround for bug in OpenCV 2.0 / 2.1 which causes
-    // this cv::Mat mat( img, true ); to not work.
-    cv::Mat tmp(img, false);
-    cv::Mat mat = tmp.clone();
-    d = new MatData( mat );
-}
-
 CvMatData::CvMatData( const cv::Mat& mat, bool copyData )
 {
     //d = copyData ? new MatData(mat.clone()) : new MatData(mat);
@@ -153,7 +143,7 @@ QDataStream &operator>>(QDataStream &in, CvMatData& d)
     // using the constructor with user allocated data disables refcounting
     cv::Mat mat( (int)rows, (int)cols, (int)type );
     assert( (uint)(mat.dataend - mat.datastart) == length );
-    memcpy( mat.datastart, data, mat.dataend - mat.datastart );
+    memcpy( mat.ptr(), data, mat.dataend - mat.datastart );
     d = mat;
     delete[] data;
     return in;

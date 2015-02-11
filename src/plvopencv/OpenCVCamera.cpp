@@ -22,7 +22,7 @@
 #include "OpenCVCamera.h"
 
 #include <opencv/highgui.h>
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 
 #include <QDebug>
 
@@ -50,8 +50,8 @@ bool OpenCVCamera::init( int id )
 
     qDebug() << "Trying to initialize OpenCV camera with id " << m_id;
 
-    m_captureDevice = cvCreateCameraCapture( m_id );
-    if( m_captureDevice == 0 )
+    m_captureDevice = new cv::VideoCapture( m_id );
+    if( !m_captureDevice->isOpened() )
     {
         qDebug() << "Initialization of camera failed";
         return false;
@@ -67,23 +67,23 @@ bool OpenCVCamera::init( int id )
 
 int OpenCVCamera::width() const
 {
-    return (int) cvGetCaptureProperty( m_captureDevice, CV_CAP_PROP_FRAME_WIDTH );
+    return (int) m_captureDevice->get( CV_CAP_PROP_FRAME_WIDTH );
 }
 
 int OpenCVCamera::height() const
 {
-    return (int) cvGetCaptureProperty( m_captureDevice, CV_CAP_PROP_FRAME_HEIGHT );
+    return (int) m_captureDevice->get( CV_CAP_PROP_FRAME_HEIGHT );
 }
 
 int OpenCVCamera::setFPS(int value)
 {
     assert(value >= 0);
-    return cvSetCaptureProperty( m_captureDevice, CV_CAP_PROP_FPS, value);
+    return m_captureDevice->set( CV_CAP_PROP_FPS, value);
 }
 
 int OpenCVCamera::FPS() const
 {
-    return (int) cvGetCaptureProperty( m_captureDevice, CV_CAP_PROP_FPS);
+    return (int) m_captureDevice->get(CV_CAP_PROP_FPS);
 }
 
 void OpenCVCamera::run()
@@ -182,9 +182,9 @@ void OpenCVCamera::pause()
 void OpenCVCamera::releaseCapture()
 {
     QMutexLocker lock( &m_opencv_mutex );
-    if(m_captureDevice !=0)
+    if(m_captureDevice->isOpened())
     {
-        cvReleaseCapture(&m_captureDevice);
+        m_captureDevice->release();
         m_captureDevice = 0;
     }
 }
@@ -236,7 +236,7 @@ bool OpenCVCamera::setDimensions( int w, int h )
         return false;
     }
 
-    cvSetCaptureProperty( m_captureDevice, CV_CAP_PROP_FRAME_WIDTH, dw );
+    m_captureDevice->set( CV_CAP_PROP_FRAME_WIDTH, dw );
 
     // check if properties did change
     int nwidth = width();
@@ -260,15 +260,14 @@ bool OpenCVCamera::getFrame( CvMatData& mat )
         return 0;
 
     // first grab a frame, this is a fast function
-    int status = cvGrabFrame( m_captureDevice );
+    int status = m_captureDevice->grab();
 
     if( !status )
         return false;
 
+    cv::Mat image = cv::Mat();
     // now do post processing such as decompression
-    const IplImage* image = cvRetrieveFrame( m_captureDevice );
-
-    if( image == 0 )
+    if (!m_captureDevice->read(image))
         return false;
 
     // add one to image count

@@ -1,7 +1,7 @@
 #ifndef PLVUTIL_H
 #define PLVUTIL_H
 
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 #include "Enum.h"
 
 namespace plv

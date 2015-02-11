@@ -3,7 +3,7 @@
 using namespace plv;
 using namespace plvblobtracker;
 
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 
 VPBlobToStringConverter::VPBlobToStringConverter()
 {

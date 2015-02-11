@@ -21,6 +21,9 @@
 
 #include <QDebug>
 
+#include <opencv/highgui.h>
+#include <opencv/cv.hpp>
+
 #include "EdgeDetectorLaplace.h"
 #include <plvcore/CvMatData.h>
 #include <plvcore/CvMatDataPin.h>

@@ -25,7 +25,7 @@
 #include <plvcore/PipelineProcessor.h>
 #include <plvcore/OutputPin.h>
 #include <plvcore/Types.h>
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 
 namespace plv
 {

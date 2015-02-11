@@ -25,6 +25,7 @@
 
 #include "ImageDirectoryProducer.h"
 
+#include <opencv/cv.hpp>
 #include <opencv/highgui.h>
 #include <plvcore/CvMatDataPin.h>
 #include <QDir>

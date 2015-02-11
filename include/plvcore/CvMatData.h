@@ -108,7 +108,6 @@ namespace plv
     public:
         inline CvMatData() : d( new MatData() ) {}
         CvMatData( const cv::Mat& mat, bool copyData = false );
-        CvMatData( const IplImage* img );
 
         /** copy constructor */
         inline CvMatData( const CvMatData& other ) : d( other.d ) {}
@@ -118,9 +117,8 @@ namespace plv
 
         CvMatData& operator=(const CvMatData& other);
         CvMatData& operator=(const cv::Mat& other);
-        CvMatData& operator=(const IplImage* iplimg);
 
-        inline void copyTo(CvMatData& dst) { d->mat.copyTo(dst); }
+        inline void copyTo(cv::Mat& dst) { d->mat.copyTo(dst); }
 
         /** Returns if the contained matrix has allocated data */
         inline bool isValid() const { return !d->mat.empty(); }
@@ -129,7 +127,7 @@ namespace plv
         /** Returns a copy of the cv::Mat header. The actual image data is not copied
             Warning: do not remove const qualifier since this data might be shared
             between threads. Beware, this can be done implicitly e.g. by converting to
-            IplImage using the operator IplImage! */
+            ! */
         inline const cv::Mat get() const { return d->mat; }
 
         /** returns a header which references the internal cv::Mat data.
@@ -190,20 +188,6 @@ namespace plv
             d->inputArray = d->mat;
             d->outputArray = d->mat;
         }
-        return *this;
-    }
-
-    inline CvMatData& CvMatData::operator=(const IplImage* iplimg)
-    {
-        assert( iplimg != 0 );
-        // copy image data
-        // workaround for bug in OpenCV 2.0 / 2.1 which causes
-        // this cv::Mat mat( img, true ); to not work.
-        cv::Mat tmp(iplimg, false);
-        cv::Mat mat = tmp.clone();
-        d->mat = mat;
-        d->inputArray = d->mat;
-        d->outputArray = d->mat;
         return *this;
     }
 }

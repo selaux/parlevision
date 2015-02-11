@@ -22,7 +22,7 @@
 #include "Average.h"
 #include <plvcore/CvMatData.h>
 #include <plvcore/CvMatDataPin.h>
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 
 using namespace plv;
 using namespace plvopencv;

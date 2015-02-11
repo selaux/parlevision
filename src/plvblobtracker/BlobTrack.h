@@ -1,7 +1,7 @@
 #ifndef PLVBLOBTRACK_BLOBTRACK_H
 #define PLVBLOBTRACK_BLOBTRACK_H
 
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 #include <QVector>
 #include "Blob.h"
 

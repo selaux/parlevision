@@ -25,7 +25,7 @@
 
 #include <plvcore/Pin.h>
 #include <plvcore/CvMatDataPin.h>
-#include <opencv/cv.h>
+#include <opencv/cv.hpp>
 
 using namespace plv;
 using namespace plvopencv;
